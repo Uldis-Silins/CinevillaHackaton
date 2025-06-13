@@ -45,7 +45,7 @@ public class Graph
 
     private List<Node> m_pathList = new();
 
-    private const int MAX_ITERATIONS = 256;
+    private const int MAX_ITERATIONS = 512;
 
     public bool AStar(OctreeNode startNode, OctreeNode endNode)
     {

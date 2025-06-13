@@ -6,6 +6,9 @@ public class Projectile_Base : MonoBehaviour
 {
     [SerializeField] private float m_speed = 5f;
     [SerializeField] private float m_lifetime = 2.5f;
+    [SerializeField] private float m_collisionRadius = 2f;
+
+    [SerializeField] private LayerMask m_hitLayer;
 
     private Rigidbody m_rb;
 
@@ -14,6 +17,16 @@ public class Projectile_Base : MonoBehaviour
     private void Awake()
     {
         m_rb = GetComponent<Rigidbody>();
+    }
+
+    private void Update()
+    {
+        Collider[] hits = Physics.OverlapSphere(transform.position, m_collisionRadius, m_hitLayer);
+        
+        if(hits.Length > 0)
+        {
+            hits[0].GetComponent<Enemy_Controller_Base>().Kill();
+        }
     }
 
     public void Initialize(Vector3 direction)
@@ -34,5 +47,15 @@ public class Projectile_Base : MonoBehaviour
         {
             Debug.Log("Room hit");
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Color temp = Gizmos.color;
+        Gizmos.color = Color.red;
+
+        Gizmos.DrawWireSphere(transform.position, m_collisionRadius);
+
+        Gizmos.color = temp;
     }
 }

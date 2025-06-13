@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5326056768333599032}
+  - component: {fileID: 821121234288441739}
   - component: {fileID: 6535413597731467379}
   - component: {fileID: 524201547474520134}
   - component: {fileID: 8842510096067679768}
   - component: {fileID: 1994196524092787687}
-  - component: {fileID: 821121234288441739}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -36,6 +36,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &821121234288441739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8427784360694096915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9715280837b8d0a4e80d11911e9c18a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_speed: 10
+  m_lifetime: 2.5
+  m_collisionRadius: 0.25
+  m_hitLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!33 &6535413597731467379
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -137,17 +155,3 @@ Rigidbody:
   m_Interpolate: 2
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!114 &821121234288441739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8427784360694096915}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9715280837b8d0a4e80d11911e9c18a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_speed: 10
-  m_lifetime: 2.5
