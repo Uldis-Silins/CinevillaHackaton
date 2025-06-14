@@ -5,6 +5,7 @@ public class Weapon_Base : MonoBehaviour
 {
     [SerializeField] private HandInputController m_handInput;
     [SerializeField] private Transform m_muzzle;
+    [SerializeField] private PassthroughCameraController m_passthroughCameraController;
 
     [SerializeField] private Projectile_Base m_projectilePrefab;
 
@@ -22,6 +23,7 @@ public class Weapon_Base : MonoBehaviour
     {
         Projectile_Base instance = Instantiate<Projectile_Base>(m_projectilePrefab, m_muzzle.position, m_muzzle.rotation);
         instance.Initialize(-m_muzzle.up);
+        m_passthroughCameraController.AnimateFire();
     }
 
     private void OnHandInputFired(float timestamp)

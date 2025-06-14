@@ -26,6 +26,7 @@ public class Projectile_Base : MonoBehaviour
         if(hits.Length > 0)
         {
             hits[0].GetComponent<Enemy_Controller_Base>().Kill();
+            AutoDestroy();
         }
     }
 
