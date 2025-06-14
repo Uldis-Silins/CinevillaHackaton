@@ -31,6 +31,8 @@ public class Enemy_SpawnController : MonoBehaviour
 
     private readonly float m_startSpawnDelay = 0.2f;
 
+    public IReadOnlyList<Enemy_Controller_Base> SpawnedEnemies => m_spawnedEnemies;
+
     private void Start()
     {
         m_spawnerSelector = RandomSpawnSelector;

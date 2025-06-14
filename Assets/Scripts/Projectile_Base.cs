@@ -8,6 +8,8 @@ public class Projectile_Base : MonoBehaviour
     [SerializeField] private float m_lifetime = 2.5f;
     [SerializeField] private float m_collisionRadius = 2f;
 
+    public ParticleSystem explosion;
+
     [SerializeField] private LayerMask m_hitLayer;
 
     private Rigidbody m_rb;
@@ -26,6 +28,7 @@ public class Projectile_Base : MonoBehaviour
         if(hits.Length > 0)
         {
             hits[0].GetComponent<Enemy_Controller_Base>().Kill();
+            Instantiate(explosion, transform.position, Quaternion.identity);
             AutoDestroy();
         }
     }

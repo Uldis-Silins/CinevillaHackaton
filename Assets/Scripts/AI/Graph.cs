@@ -80,7 +80,7 @@ public class Graph
         {
             if(++iterationCount > MAX_ITERATIONS)
             {
-                Debug.LogError("Exceeded max iteration count");
+                Debug.LogWarning("Exceeded max iteration count");
                 return false;
             }
 

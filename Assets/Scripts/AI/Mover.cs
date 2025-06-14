@@ -36,7 +36,7 @@ public class Mover : MonoBehaviour
         if (Vector3.Distance(m_graph.GetNode(m_currentWaypoint).bounds.center, transform.position) < accuracy)
         {
             m_currentWaypoint++;
-            Debug.Log($"Waypoint {m_currentWaypoint} reached");
+            //Debug.Log($"Waypoint {m_currentWaypoint} reached");
         }
 
         if(m_currentWaypoint < m_graph.GetPathLength())
