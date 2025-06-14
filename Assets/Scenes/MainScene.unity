@@ -1181,7 +1181,7 @@ MonoBehaviour:
   - m_pathDistanceType: 2
     m_pathBuilder: {fileID: 1471659895}
   m_playerController: {fileID: 2133574036}
-  m_pointsPerBat: 1
+  m_pointsPerBat: 0.1
   m_passthroughCameraController: {fileID: 1927344047}
 --- !u!4 &994368589
 Transform:
