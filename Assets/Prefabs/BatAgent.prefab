@@ -174,9 +174,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  accuracy: 1
+  accuracy: 0.2
   turnSpeed: 5
   builder: {fileID: 0}
+  drawDebug: 0
 --- !u!135 &6542801672508051381
 SphereCollider:
   m_ObjectHideFlags: 0

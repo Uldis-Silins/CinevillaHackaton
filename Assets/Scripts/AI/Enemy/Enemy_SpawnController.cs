@@ -26,6 +26,9 @@ public class Enemy_SpawnController : MonoBehaviour
     [SerializeField] private Transform[] m_spawnPoints;
     [SerializeField] private EnemyRoute[] m_paths;
 
+    [SerializeField] private PlayerController m_playerController;
+    [SerializeField] private float m_pointsPerBat = 0.7f;
+
     [SerializeField] private PassthroughCameraController m_passthroughCameraController;
 
     private int m_maxSpawnCount = 10;
@@ -57,12 +60,10 @@ public class Enemy_SpawnController : MonoBehaviour
             if(enemy.LifeTime > 10f && enemy.CurrentRoute.PathDistanceType == PathDistanceType.Far)
             {
                 enemy.SetRoute(GetEnemyRoute(PathDistanceType.Mid));
-                Debug.Log("Select mid");
             }
             else if (enemy.LifeTime > 20f && enemy.CurrentRoute.PathDistanceType == PathDistanceType.Mid)
             {
                 enemy.SetRoute(GetEnemyRoute(PathDistanceType.Close));
-                Debug.Log("Select close");
             }
             else if(enemy.LifeTime > 30f && !m_inGameOver)
             {
@@ -81,6 +82,29 @@ public class Enemy_SpawnController : MonoBehaviour
             }
 
             m_spawnedEnemies.Clear();
+        }
+
+        if (!m_inGameOver)
+        {
+            int enemiesInClose = GetEnemyCountPerPath(PathDistanceType.Close);
+
+            if (enemiesInClose > 0)
+            {
+                m_passthroughCameraController.SetCameraColor(PassthroughCameraController.CameraColorType.Close);
+            }
+            else
+            {
+                int enemiesInMid = GetEnemyCountPerPath(PathDistanceType.Mid);
+
+                if (enemiesInMid > 0)
+                {
+                    m_passthroughCameraController.SetCameraColor(PassthroughCameraController.CameraColorType.Mid);
+                }
+                else
+                {
+                    m_passthroughCameraController.SetCameraColor(PassthroughCameraController.CameraColorType.Far);
+                }
+            }
         }
     }
 
@@ -108,6 +132,21 @@ public class Enemy_SpawnController : MonoBehaviour
     {
         m_curSpawnerIndex = (m_curSpawnerIndex + 1) % m_spawnPoints.Length;
         return m_spawnPoints[m_curSpawnerIndex];
+    }
+
+    private int GetEnemyCountPerPath(PathDistanceType type)
+    {
+        int enemies = 0;
+
+        foreach (var enemy in m_spawnedEnemies)
+        {
+            if(enemy.CurrentRoute.PathDistanceType == type)
+            {
+                enemies++;
+            }
+        }
+
+        return enemies;
     }
 
     private EnemyRoute GetEnemyRoute(PathDistanceType type)
@@ -142,6 +181,13 @@ public class Enemy_SpawnController : MonoBehaviour
     {
         m_spawnedEnemies.Remove(killedEnemy);
         killedEnemy.onKilled.RemoveListener(OnEnemyKilled);
+
+        m_playerController.score += m_pointsPerBat;
+
+        if(m_playerController.score >= 13f)
+        {
+            m_inGameOver = true;
+        }
 
         StartCoroutine(RespawnEnemy(1f));
     }

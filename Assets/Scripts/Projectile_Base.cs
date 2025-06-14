@@ -37,8 +37,9 @@ public class Projectile_Base : MonoBehaviour
         if (m_targetEnemy != null && Vector3.Distance(m_startPosition, m_targetEnemy.transform.position) > Vector3.Distance(m_startPosition, transform.position))
         {
             Vector3 dir = (m_targetEnemy.transform.position - transform.position).normalized * m_speed;
-            Vector3 seek = Vector3.Lerp(m_startVelocity, dir, 5f * Time.deltaTime);
+            Vector3 seek = Vector3.Lerp(m_startVelocity, dir, 0.5f * Time.deltaTime);
             m_rb.linearVelocity = seek;
+            m_startVelocity = (m_startVelocity + seek).normalized * m_speed;
         }
     }
 

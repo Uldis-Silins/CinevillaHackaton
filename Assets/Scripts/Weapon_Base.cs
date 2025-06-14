@@ -27,9 +27,9 @@ public class Weapon_Base : MonoBehaviour
 
     private void Update()
     {
-        if (m_currentClosest) m_currentClosest.aimTarget.SetActive(false);
+        //if (m_currentClosest) m_currentClosest.aimTarget.SetActive(false);
         m_currentClosest = GetClosestEnemy();
-        if (m_currentClosest) m_currentClosest.aimTarget.SetActive(true);
+        //if (m_currentClosest) m_currentClosest.aimTarget.SetActive(true);
     }
 
     private void Fire()
