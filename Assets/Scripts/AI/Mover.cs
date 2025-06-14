@@ -16,11 +16,11 @@ public class Mover : MonoBehaviour
     public OctreeBuilder builder;
     private Graph m_graph;
 
+    public bool drawDebug;
+
     private void Start()
     {
-        m_graph = builder.waypoints;
-        m_currentNode = GetClosestNode(transform.position);
-        GetRandomDestination();
+        Initialize();
     }
 
     private void Update()
@@ -52,7 +52,7 @@ public class Mover : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (m_graph == null || m_graph.GetPathLength() == 0) return;
+        if (!drawDebug || m_graph == null || m_graph.GetPathLength() == 0) return;
 
         Color prevColor = Gizmos.color;
 
@@ -73,6 +73,13 @@ public class Mover : MonoBehaviour
         }
 
         Gizmos.color = prevColor;
+    }
+
+    public void Initialize()
+    {
+        m_graph = builder.waypoints;
+        m_currentNode = GetClosestNode(transform.position);
+        GetRandomDestination();
     }
 
     void GetRandomDestination()

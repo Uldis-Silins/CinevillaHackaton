@@ -7,6 +7,8 @@ public class OctreeBuilder : MonoBehaviour
     public GameObject[] objects;
     public float minNodeSize;
 
+    public bool drawDebug;
+
     private Octree m_octree;
 
     public readonly Graph waypoints = new();
@@ -18,7 +20,7 @@ public class OctreeBuilder : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (!Application.isPlaying) return;
+        if (!Application.isPlaying || !drawDebug) return;
 
         Color prevColor = Gizmos.color;
         Gizmos.color = Color.green;

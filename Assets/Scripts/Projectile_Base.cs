@@ -14,7 +14,9 @@ public class Projectile_Base : MonoBehaviour
 
     private Rigidbody m_rb;
 
-    private Vector3 m_prevPosition;
+    private Enemy_Controller_Base m_targetEnemy;
+    private Vector3 m_startPosition;
+    private Vector3 m_startVelocity;
 
     private void Awake()
     {
@@ -31,12 +33,22 @@ public class Projectile_Base : MonoBehaviour
             Instantiate(explosion, transform.position, Quaternion.identity);
             AutoDestroy();
         }
+
+        if (m_targetEnemy != null && Vector3.Distance(m_startPosition, m_targetEnemy.transform.position) > Vector3.Distance(m_startPosition, transform.position))
+        {
+            Vector3 dir = (m_targetEnemy.transform.position - transform.position).normalized * m_speed;
+            Vector3 seek = Vector3.Lerp(m_startVelocity, dir, 5f * Time.deltaTime);
+            m_rb.linearVelocity = seek;
+        }
     }
 
-    public void Initialize(Vector3 direction)
+    public void Initialize(Vector3 direction, Enemy_Controller_Base target)
     {
-        m_prevPosition = transform.position;
-        m_rb.AddForce(direction * m_speed, ForceMode.Impulse);
+        m_targetEnemy = target;
+        m_startVelocity = direction * m_speed;
+        m_rb.linearVelocity = m_startVelocity;
+        m_startPosition = transform.position;
+        
         Invoke(nameof(AutoDestroy), m_lifetime);
     }
 
