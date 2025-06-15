@@ -64,11 +64,11 @@ public class Enemy_SpawnController : MonoBehaviour
             {
                 enemy.SetRoute(GetEnemyRoute(PathDistanceType.Mid));
             }
-            else if (enemy.LifeTime > 10f && enemy.CurrentRoute.PathDistanceType == PathDistanceType.Mid)
+            else if (enemy.LifeTime > 30f && enemy.CurrentRoute.PathDistanceType == PathDistanceType.Mid)
             {
                 enemy.SetRoute(GetEnemyRoute(PathDistanceType.Close));
             }
-            else if(enemy.LifeTime > 10f && !m_inGameOver)
+            else if(enemy.LifeTime > 60f && !m_inGameOver)
             {
                 m_passthroughCameraController.AnimateGameOver();
                 m_inGameOver = true;

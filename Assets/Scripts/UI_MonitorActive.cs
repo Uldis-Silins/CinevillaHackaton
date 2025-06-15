@@ -1,3 +1,4 @@
+using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -31,6 +32,7 @@ public class UI_MonitorActive : MonoBehaviour
         if (m_gameStarted)
         {
             transform.position = Vector3.Lerp(m_startLocation, m_targetLocation, 1f - (m_animTimer / 2f));
+            m_animTimer -= Time.deltaTime;
         }
     }
 
