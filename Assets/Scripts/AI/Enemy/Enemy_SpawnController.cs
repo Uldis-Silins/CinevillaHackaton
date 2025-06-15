@@ -52,7 +52,6 @@ public class Enemy_SpawnController : MonoBehaviour
     {
         m_spawnerSelector = LoopSpawnSelector;
         //StartCoroutine(RespawnEnemy(m_startSpawnDelay));
-        m_spawnRoutine = StartCoroutine(SpawnEnemies());
     }
 
     private void Update()
@@ -74,6 +73,8 @@ public class Enemy_SpawnController : MonoBehaviour
                 m_passthroughCameraController.AnimateGameOver();
                 m_inGameOver = true;
                 m_playerController.vampires.PlayAnimation();
+                m_playerController.uiMonitor.gameObject.SetActive(false);
+                m_playerController.EndGame();
             }
         }
 
@@ -111,6 +112,11 @@ public class Enemy_SpawnController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void StartGame()
+    {
+        m_spawnRoutine = StartCoroutine(SpawnEnemies());
     }
 
     private IEnumerator RespawnEnemy(float spawnDelay)

@@ -69,9 +69,14 @@ public class Projectile_Base : MonoBehaviour
         if(collision.gameObject.layer == LayerMask.NameToLayer("Room"))
         {
             Debug.Log("Room hit");
-            Vector3 decalPos = collision.contacts[0].point + collision.contacts[0].normal * 0.25f;
+            Vector3 decalPos = collision.contacts[0].point;
             Instantiate(m_wallHitDecal, decalPos, Quaternion.LookRotation(-collision.contacts[0].normal));
             AutoDestroy();
+        }
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("UI"))
+        {
+            collision.gameObject.GetComponent<UI_MonitorActive>().OnHit();
         }
     }
 

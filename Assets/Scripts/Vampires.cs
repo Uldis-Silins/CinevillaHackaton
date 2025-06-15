@@ -7,6 +7,8 @@ public class Vampires : MonoBehaviour
 
     public float animTime = 1f;
 
+    public AudioSource vampAudio;
+
     private float m_timer;
     private int m_curIndex;
 
@@ -32,6 +34,8 @@ public class Vampires : MonoBehaviour
                     vampires[m_curIndex].SetActive(true);
                     m_timer = 0;
                 }
+
+                vampAudio.transform.position =  vampires[m_curIndex].transform.position;
             }
 
             m_timer += Time.deltaTime;
@@ -44,5 +48,8 @@ public class Vampires : MonoBehaviour
         m_timer = 0f;
         vampires[m_curIndex].SetActive(true);
         m_inAnimation = true;
+
+        vampAudio.transform.position = vampires[m_curIndex].transform.position;
+        vampAudio.Play();
     }
 }

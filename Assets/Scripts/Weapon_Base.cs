@@ -13,6 +13,8 @@ public class Weapon_Base : MonoBehaviour
 
     [SerializeField] private Projectile_Base m_projectilePrefab;
 
+    public AudioSource fireAudio;
+
     private Enemy_Controller_Base m_currentClosest;
 
     private void OnEnable()
@@ -41,6 +43,8 @@ public class Weapon_Base : MonoBehaviour
         Vector3 projectileVelocity = aimAssist;
         instance.Initialize(projectileVelocity, m_currentClosest);
         m_passthroughCameraController.AnimateFire();
+        fireAudio.pitch = Random.Range(0.8f, 1.2f);
+        fireAudio.Play();
     }
 
     private Enemy_Controller_Base GetClosestEnemy()
