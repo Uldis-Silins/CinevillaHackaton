@@ -64,11 +64,11 @@ public class Enemy_SpawnController : MonoBehaviour
             {
                 enemy.SetRoute(GetEnemyRoute(PathDistanceType.Mid));
             }
-            else if (enemy.LifeTime > 30f && enemy.CurrentRoute.PathDistanceType == PathDistanceType.Mid)
+            else if (enemy.LifeTime > 20f && enemy.CurrentRoute.PathDistanceType == PathDistanceType.Mid)
             {
                 enemy.SetRoute(GetEnemyRoute(PathDistanceType.Close));
             }
-            else if(enemy.LifeTime > 60f && !m_inGameOver)
+            else if(enemy.LifeTime > 30f && !m_inGameOver)
             {
                 m_passthroughCameraController.AnimateGameOver();
                 m_inGameOver = true;
@@ -118,6 +118,13 @@ public class Enemy_SpawnController : MonoBehaviour
     {
         m_spawnRoutine = StartCoroutine(SpawnEnemies());
     }
+
+    public void SetData(Transform[] spawnPoints, Enemy_SpawnController.EnemyRoute[] paths)
+    {
+        m_spawnPoints = spawnPoints;
+        m_paths = paths;
+    }
+
 
     private IEnumerator RespawnEnemy(float spawnDelay)
     {
