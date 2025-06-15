@@ -49,7 +49,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4849546141278367706}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -102,9 +102,9 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 2729025446726692396}
   - component: {fileID: 5324850098929849479}
   - component: {fileID: 6542801672508051381}
+  - component: {fileID: -5857189185927526398}
   m_Layer: 7
   m_Name: BatAgent
   m_TagString: Untagged
@@ -160,6 +161,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_mover: {fileID: 5324850098929849479}
+  m_ragdollPrefab: {fileID: 237835950506851374, guid: d743387ca18d51f4e83de5365c669819, type: 3}
+  m_rootForRagdoll: {fileID: 7357019882948861407}
   aimTarget: {fileID: 4849546141278367706}
 --- !u!114 &5324850098929849479
 MonoBehaviour:
@@ -174,8 +177,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  accuracy: 0.2
-  turnSpeed: 5
+  accuracy: 1
+  turnSpeed: 15
   builder: {fileID: 0}
   drawDebug: 0
 --- !u!135 &6542801672508051381
@@ -193,12 +196,39 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &-5857189185927526398
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7765784002850340253}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &7031205231763028532
 PrefabInstance:
   m_ObjectHideFlags: 0

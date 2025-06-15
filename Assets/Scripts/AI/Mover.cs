@@ -80,6 +80,7 @@ public class Mover : MonoBehaviour
         m_graph = builder.waypoints;
         m_currentNode = GetClosestNode(transform.position);
         GetRandomDestination();
+        m_currentWaypoint = 0;
     }
 
     void GetRandomDestination()

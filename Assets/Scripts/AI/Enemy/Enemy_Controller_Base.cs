@@ -8,6 +8,9 @@ public class Enemy_Controller_Base : MonoBehaviour
 
     [SerializeField] private Mover m_mover;
 
+    [SerializeField] private Transform m_ragdollPrefab;
+    [SerializeField] private Transform m_rootForRagdoll;
+
     public GameObject aimTarget;
 
     private float m_spawnTime;
@@ -31,7 +34,25 @@ public class Enemy_Controller_Base : MonoBehaviour
 
     public void Kill()
     {
+        var instance = Instantiate(m_ragdollPrefab, transform.position, transform.rotation);
+
+        CopyTransform(m_rootForRagdoll, instance);
+
         onKilled?.Invoke(this);
         Destroy(gameObject);
     }
+
+    private void CopyTransform(Transform myRoot, Transform fromRoot)
+    {
+        myRoot.SetPositionAndRotation(fromRoot.transform.position, fromRoot.transform.rotation);
+
+        if (myRoot.childCount == fromRoot.childCount)
+        {
+            for (int i = 0; i < myRoot.childCount; i++)
+            {
+                CopyTransform(myRoot.GetChild(i), fromRoot.GetChild(i));
+            }
+        }
+    }
+
 }
