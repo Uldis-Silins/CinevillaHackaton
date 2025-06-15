@@ -27,9 +27,11 @@ public class Enemy_SpawnController : MonoBehaviour
     [SerializeField] private EnemyRoute[] m_paths;
 
     [SerializeField] private PlayerController m_playerController;
-    [SerializeField] private float m_pointsPerBat = 0.7f;
+    [SerializeField] private int m_pointsPerBat = 1;
 
     [SerializeField] private PassthroughCameraController m_passthroughCameraController;
+
+    public UI_MonitorActive m_monitor;
 
     private int m_maxSpawnCount = 10;
 
@@ -55,20 +57,23 @@ public class Enemy_SpawnController : MonoBehaviour
 
     private void Update()
     {
+        Stack<Enemy_Controller_Base> outOfBounds = new Stack<Enemy_Controller_Base>();
+
         foreach (var enemy in m_spawnedEnemies)
         {
             if(enemy.LifeTime > 10f && enemy.CurrentRoute.PathDistanceType == PathDistanceType.Far)
             {
                 enemy.SetRoute(GetEnemyRoute(PathDistanceType.Mid));
             }
-            else if (enemy.LifeTime > 20f && enemy.CurrentRoute.PathDistanceType == PathDistanceType.Mid)
+            else if (enemy.LifeTime > 10f && enemy.CurrentRoute.PathDistanceType == PathDistanceType.Mid)
             {
                 enemy.SetRoute(GetEnemyRoute(PathDistanceType.Close));
             }
-            else if(enemy.LifeTime > 30f && !m_inGameOver)
+            else if(enemy.LifeTime > 10f && !m_inGameOver)
             {
                 m_passthroughCameraController.AnimateGameOver();
                 m_inGameOver = true;
+                m_playerController.vampires.PlayAnimation();
             }
         }
 
@@ -168,7 +173,7 @@ public class Enemy_SpawnController : MonoBehaviour
 
         while (true)
         {
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(10f);
 
             if (m_spawnedEnemies.Count < m_maxSpawnCount)
             {
@@ -182,12 +187,9 @@ public class Enemy_SpawnController : MonoBehaviour
         m_spawnedEnemies.Remove(killedEnemy);
         killedEnemy.onKilled.RemoveListener(OnEnemyKilled);
 
-        m_playerController.score += m_pointsPerBat;
+        m_playerController.SetScore(m_pointsPerBat);
 
-        if(m_playerController.score >= 13f)
-        {
-            m_inGameOver = true;
-        }
+        m_monitor.OnKill();
 
         StartCoroutine(RespawnEnemy(1f));
     }

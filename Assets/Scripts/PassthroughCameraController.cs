@@ -44,7 +44,7 @@ public class PassthroughCameraController : MonoBehaviour
 
             if (m_gameOverAnimationTimer > m_gameOverAnimationTime)
             {
-                m_inGameOver = false;
+                //m_inGameOver = false;
             }
         }
         else
