@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     public Vampires vampires;
     public UI_MonitorActive uiMonitor;
 
+    public Weapon_Base[] weapons;
+
     private void Update()
     {
         if (vampires.Finished)
@@ -20,6 +22,14 @@ public class PlayerController : MonoBehaviour
     {
         m_score += score;
         uiMonitor.SetScore(m_score);
+    }
+
+    public void EndGame()
+    {
+        foreach (Weapon_Base weapon in weapons)
+        {
+            weapon.enabled = false;
+        }
     }
 
     public void GameOver()

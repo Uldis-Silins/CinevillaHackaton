@@ -11,6 +11,9 @@ public class Enemy_Controller_Base : MonoBehaviour
     [SerializeField] private Transform m_ragdollPrefab;
     [SerializeField] private Transform m_rootForRagdoll;
 
+    public AudioSource batAudio;
+    public AudioClip[] batClips;
+
     public GameObject aimTarget;
 
     private float m_spawnTime;
@@ -23,6 +26,9 @@ public class Enemy_Controller_Base : MonoBehaviour
         aimTarget.SetActive(false);
         SetRoute(route);
         m_spawnTime = Time.time;
+
+        batAudio.clip = batClips[Random.Range(0, batClips.Length)];
+        batAudio.Play();
     }
 
     public void SetRoute(Enemy_SpawnController.EnemyRoute route)
@@ -35,7 +41,7 @@ public class Enemy_Controller_Base : MonoBehaviour
     public void Kill()
     {
         var instance = Instantiate(m_ragdollPrefab, transform.position, transform.rotation);
-
+        instance.GetComponent<AudioSource>().pitch = Random.Range(0.8f, 1.2f);
         CopyTransform(m_rootForRagdoll, instance);
 
         onKilled?.Invoke(this);
