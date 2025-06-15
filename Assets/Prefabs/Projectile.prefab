@@ -52,6 +52,7 @@ MonoBehaviour:
   m_collisionRadius: 0.5
   m_seekAmount: 1.5
   m_wallHitDecal: {fileID: 4027378880760029738, guid: f51a4dddaa7984849a2601cb0eb2bd9e, type: 3}
+  wallHitParticles: {fileID: 8100226105402827268, guid: fb09b34c30dbfea4dbc3f231b2ac5cc0, type: 3}
   explosion: {fileID: 1841873400417731302, guid: 284e481ea2a16824cba1304c611b4e7b, type: 3}
   m_enemyLayer:
     serializedVersion: 2
